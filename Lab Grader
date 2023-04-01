@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Culinary Lab Grader</title>
+  </head>
+  <body>
+    <h1>Culinary Lab Grader</h1>
+    <ul id="name-list">
+      <li>
+        <span>John</span>
+        <select class="mise-en-place">
+          <option value="">Select a grade</option>
+          <option value="A">A</option>
+          <option value="B">B</option>
+          <option value="C">C</option>
+          <option value="D">D</option>
+          <option value="F">F</option>
+        </select>
+        <button class="feedback-button">Send Feedback</button>
+      </li>
+      <li>
+        <span>Mary</span>
+        <select class="professionalism">
+          <option value="">Select a grade</option>
+          <option value="A">A</option>
+          <option value="B">B</option>
+          <option value="C">C</option>
+          <option value="D">D</option>
+          <option value="F">F</option>
+        </select>
+        <button class="feedback-button">Send Feedback</button>
+      </li>
+      <li>
+        <span>Bob</span>
+        <select class="safety">
+          <option value="">Select a grade</option>
+          <option value="A">A</option>
+          <option value="B">B</option>
+          <option value="C">C</option>
+          <option value="D">D</option>
+          <option value="F">F</option>
+        </select>
+        <button class="feedback-button">Send Feedback</button>
+      </li>
+      <li>
+        <span>Jane</span>
+        <select class="sanitation">
+          <option value="">Select a grade</option>
+          <option value="A">A</option>
+          <option value="B">B</option>
+          <option value="C">C</option>
+          <option value="D">D</option>
+          <option value="F">F</option>
+        </select>
+        <button class="feedback-button">Send Feedback</button>
+      </li>
+    </ul>
+    <script>
+      // Add an event listener to each feedback button
+      const feedbackButtons = document.querySelectorAll('.feedback-button');
+      feedbackButtons.forEach(button => {
+        button.addEventListener('click', (event) => {
+          const name = event.target.parentElement.querySelector('span').textContent;
+          const criterion = event.target.parentElement.querySelector('select').getAttribute('class').split('-')[0];
+          const selectedValue = event.target.parentElement.querySelector('select').value;
+          console.log(`Grade ${selectedValue} selected for ${name} on criterion ${criterion}`);
+          // Send feedback email to the student
+          const subject = `Culinary Lab Grading: ${criterion}`;
+          const body = `Dear ${name},\n\nYour grade for ${criterion} is ${selectedValue}. Please let me know if you have any questions about this feedback.\n\nBest regards,\nProfessor Smith`;
+          const mailToLink = `mailto:${name}@example.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+          window.location.href = mailToLink;
+        });
+      });
+    </script>
+  </body>
+</html>
